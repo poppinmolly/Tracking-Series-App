@@ -58,6 +58,7 @@ fun DiscoverScreenUi(){
             descriptionText = "Tap any show to mark episodes as watched and track your progress through seasons!",
             ico = R.drawable.ic_tv
         )
+
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
         InputBar()
         Spacer(modifier = Modifier.padding(vertical = 20.dp))
