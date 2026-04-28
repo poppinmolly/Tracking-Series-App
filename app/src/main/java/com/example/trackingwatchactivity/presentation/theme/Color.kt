@@ -41,3 +41,5 @@ val BackgroundGradient = Brush.verticalGradient(
     )
 )
 val BottomBarBackground = Color(0xFF2B2930)
+
+val LightGrayColor = Color(0xFF49454F)

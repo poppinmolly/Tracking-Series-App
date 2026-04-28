@@ -1,5 +1,6 @@
 package com.example.trackingwatchactivity.presentation.screens.detailScreen
 
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -26,7 +27,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
@@ -39,6 +39,7 @@ import com.example.trackingwatchactivity.R
 import com.example.trackingwatchactivity.domain.model.WatchStatus
 import com.example.trackingwatchactivity.presentation.theme.BottomBarBackground
 import com.example.trackingwatchactivity.presentation.theme.GrayMainAppColor
+import com.example.trackingwatchactivity.presentation.theme.LightGrayColor
 import com.example.trackingwatchactivity.presentation.theme.PurpleMainAppColor
 
 @Preview
@@ -74,8 +75,18 @@ fun DetailScreen(){
         // STATUS OF WATCHING
         RowOfButtonsStatus()
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
+        // Progress Card
+        ProgressCard(modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+        )
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
         // AdditionalButtons (RATE | ADD NOTE | DELETE)
         AdditionalButtons(modifier = Modifier.align(Alignment.CenterHorizontally))
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
+        // OVERVIEW TEXT
+        OverviewText(
+            modifier = Modifier.fillMaxWidth(0.95f)
+        )
     }
 }
 
@@ -245,5 +256,128 @@ fun AdditionalButtons(
                 tint = Color(0xFFFFB4AA),
             )
         }
+    }
+}
+
+
+@Composable
+fun ProgressCard(
+    modifier: Modifier
+){
+    Box(
+        modifier = modifier
+            .clip(shape = RoundedCornerShape(20.dp))
+            .background(color = BottomBarBackground)
+            .height(100.dp)
+            .fillMaxWidth(0.9f),
+        contentAlignment = Alignment.Center
+    ){
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            // Progress counter 
+            Row(
+                Modifier
+                    .padding(horizontal = 13.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(text = "Progress",
+                    color = Color.White,
+                    fontSize = 17.sp)
+                Text(text = "40%",
+                    color = PurpleMainAppColor,
+                    fontSize = 20.sp)
+            }
+
+            // Episodes Counter
+            Row(
+                Modifier
+                    .padding(horizontal = 13.dp)
+                    .fillMaxWidth(),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+            ) {
+                Text(text = "25/62 episodes",
+                    color = GrayMainAppColor,
+                    fontSize = 14.sp)
+                Text(text = "Currently: S3 E5",
+                    color = GrayMainAppColor,
+                    fontSize = 14.sp)
+            }
+            // Progress Bar
+            ProgressBar(
+                modifier = Modifier
+                    .align(Alignment.CenterHorizontally)
+                    .padding(vertical = 5.dp)
+
+            )
+        }
+    }
+}
+
+@Composable
+fun ProgressCardPreview(){
+    Column(
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        ProgressCard(modifier = Modifier
+            .align(Alignment.CenterHorizontally)
+        )
+    }
+}
+
+@Composable
+private fun ProgressBar(
+    modifier: Modifier = Modifier
+){
+    Box(
+        modifier = modifier
+            .clip(shape = RoundedCornerShape(15.dp))
+            .background(color = LightGrayColor)
+            .height(13.dp)
+            .fillMaxWidth(0.95f),
+    ){
+        Box(modifier = Modifier
+            .background(color = PurpleMainAppColor)
+            .fillMaxWidth(0.4f)
+            .fillMaxHeight()
+        )
+    }
+}
+
+@Composable
+fun OverviewText(
+    modifier: Modifier
+){
+    Column(
+        modifier = modifier
+    ) {
+        // OVERVIEW TEXT
+        Text(
+            text = "Overview",
+            color = GrayMainAppColor,
+            fontSize = 20.sp
+        )
+        Spacer(modifier = Modifier.padding(vertical = 5.dp))
+        // DESCRIPTION TEXT
+        Text(
+            text = "A chemistry teacher diagnosed with terminal lung cancer teams up with a former student to manufacture and sell methamphetamine. As Walter White descends into the criminal underworld, he transforms from a mild-mannered teacher into a ruthless drug kingpin, risking everything to secure his family's financial future.",
+            color = GrayMainAppColor,
+            fontSize = 15.sp
+        )
+        Spacer(modifier = Modifier.padding(vertical = 15.dp))
+
+        Text(
+            text = "Genres",
+            color = GrayMainAppColor,
+            fontSize = 20.sp
+        )
+        Text(
+            text = "Drama, Crime, Thriller",
+            color = GrayMainAppColor,
+            fontSize = 15.sp
+        )
     }
 }

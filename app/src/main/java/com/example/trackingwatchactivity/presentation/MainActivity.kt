@@ -20,7 +20,9 @@ import com.example.trackingwatchactivity.presentation.screens.discoverScreen.Dis
 import com.example.trackingwatchactivity.presentation.theme.BackgroundGradient
 import com.example.trackingwatchactivity.presentation.utils.BottomNavBar
 import com.example.trackingwatchactivity.presentation.utils.TopBar
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
