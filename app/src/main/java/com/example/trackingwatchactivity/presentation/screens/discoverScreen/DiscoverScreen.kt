@@ -36,13 +36,14 @@ data class MoviesTest(
     val nameOfTitle: String = "Breaking Bad",
     val ico: Int = R.drawable.bannerbreakingbadtest,
     val year: String = "2008",
+
     val rating: String = "9.5"
 )
 
 val films = listOf(
     MoviesTest(),  MoviesTest(), MoviesTest(), MoviesTest(), MoviesTest(), MoviesTest(), MoviesTest(),
 )
-@Preview
+
 @Composable
 fun DiscoverScreenUi(){
     Column(modifier = Modifier
@@ -58,6 +59,7 @@ fun DiscoverScreenUi(){
             descriptionText = "Tap any show to mark episodes as watched and track your progress through seasons!",
             ico = R.drawable.ic_tv
         )
+
 
         Spacer(modifier = Modifier.padding(vertical = 5.dp))
         InputBar()
