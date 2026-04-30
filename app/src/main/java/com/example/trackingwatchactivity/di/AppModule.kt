@@ -1,6 +1,8 @@
 package com.example.trackingwatchactivity.di
 
 import com.example.trackingwatchactivity.data.remote.api.ApiService
+import com.example.trackingwatchactivity.data.repository.ShowRepositoryImpl
+import com.example.trackingwatchactivity.domain.repository.ShowRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +29,12 @@ object AppModule {
     @Singleton
     fun provideRetrofitService(retrofit: Retrofit): ApiService {
         return retrofit.create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideRepository(repository: ShowRepositoryImpl) : ShowRepository{
+        return repository
     }
 
 

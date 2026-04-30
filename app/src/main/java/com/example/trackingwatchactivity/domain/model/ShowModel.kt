@@ -5,8 +5,9 @@ data class ShowModel(
     val name: String,
     val overview: String,
     val genreIds: List<Int>,
-    val voteAverage: Long,
+    val voteAverage: String,
     val posterPath: String,
     val date: String,
+    val title: String
 
 )

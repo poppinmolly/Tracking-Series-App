@@ -1,17 +1,19 @@
 package com.example.trackingwatchactivity.presentation.utils
 
-import androidx.compose.foundation.Image
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -25,52 +27,45 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil3.compose.AsyncImage
 import com.example.trackingwatchactivity.R
-import com.example.trackingwatchactivity.presentation.screens.discoverScreen.MoviesTest
+import com.example.trackingwatchactivity.domain.model.ShowModel
 import com.example.trackingwatchactivity.presentation.theme.GrayMainAppColor
+import kotlin.Int
 
 
 @Composable
 fun CardWithFilm(
     modifier: Modifier = Modifier,
-    film: MoviesTest
+    film: ShowModel
 ){
     Column(
         horizontalAlignment = Alignment.Start,
     ) {
         Box(
             modifier = modifier
+                .clip(shape = RoundedCornerShape(10.dp))
                 .width(150.dp)
                 .height(180.dp),
             contentAlignment = Alignment.Center
 
         ){
-            Image(
-                painter = painterResource(film.ico),
-                contentDescription = null,
-                modifier = Modifier
-                    .clip(shape = RoundedCornerShape(10.dp))
-
-            )
+            ImagePoster(url = film.posterPath)
             RatingElement(
                 modifier = Modifier
                     .align(Alignment.TopEnd)
                     .padding(horizontal = 17.dp, vertical = 5.dp),
-                ratingText = film.rating
-
-
+                ratingText = film.voteAverage
             )
 
         }
-        Column(
-            modifier = Modifier.padding(horizontal = 20.dp)
-        ) {
-            Text(text = film.nameOfTitle,
+        Column() {
+            Text(text = film.name,
                 fontSize = 15.sp,
                 color = GrayMainAppColor)
-            Text(text = film.year,
+            Text(text = film.date,
                 textAlign = TextAlign.Start,
-                fontSize = 12.sp,
+                fontSize = 14.sp,
                 color = GrayMainAppColor
             )
         }
@@ -110,15 +105,36 @@ fun RatingElement(
 }
 @Preview
 @Composable
-fun RatingElementPreview(){
+private fun RatingElementPreview(){
     RatingElement(ratingText = "9.5")
 }
 
-val test: MoviesTest = MoviesTest()
+private val testFilm = ShowModel(
+    id = 1,
+    name = "Test Title",
+    overview = "Something text test",
+    genreIds = listOf(1,2,3,4),
+    voteAverage = "5.5",
+    posterPath = "https://image.tmdb.org/t/p/w500/5lcxWLVAEICkFpuAiV1aMy7ZZj3.jpg",
+    date = "2005",
+    title = "Test title again!"
+)
+
+
 @Composable
-@Preview(showBackground = true)
-fun CardWithFilmPreview(){
-    CardWithFilm(
-        film = test
+private fun CardWithFilmPreview(){
+    CardWithFilm(film = testFilm)
+}
+
+@Composable
+fun ImagePoster(
+    url: String
+){
+    AsyncImage(
+        model = url,
+        contentDescription = null,
+        modifier = Modifier
+            .fillMaxSize(),
     )
+    Log.d("ImagePoster", "url: $url")
 }

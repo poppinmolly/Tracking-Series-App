@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import com.example.trackingwatchactivity.presentation.screens.discoverScreen.DiscoverScreen
 import com.example.trackingwatchactivity.presentation.screens.discoverScreen.DiscoverScreenUi
 import com.example.trackingwatchactivity.presentation.screens.libraryScreen.LibraryScreen
 import com.example.trackingwatchactivity.presentation.screens.profileScreen.ProfileScreen
@@ -22,7 +23,7 @@ fun AppNavHost(
         startDestination = Routes.DiscoverScreen.route,
         modifier = modifier
     ) {
-        composable(Routes.DiscoverScreen.route){ DiscoverScreenUi()}
+        composable(Routes.DiscoverScreen.route){ DiscoverScreen()}
         composable(Routes.LibraryScreen.route){ LibraryScreen() }
         composable(Routes.StatsScreen.route){ StatsScreen() }
         composable(Routes.ProfileScreen.route){ ProfileScreen() }

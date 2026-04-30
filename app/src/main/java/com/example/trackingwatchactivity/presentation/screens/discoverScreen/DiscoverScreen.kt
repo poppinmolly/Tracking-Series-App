@@ -17,6 +17,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -24,28 +26,29 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.trackingwatchactivity.R
+import com.example.trackingwatchactivity.domain.model.ShowModel
 import com.example.trackingwatchactivity.presentation.theme.BottomBarBackground
 import com.example.trackingwatchactivity.presentation.theme.GrayMainAppColor
 import com.example.trackingwatchactivity.presentation.theme.PurpleMainAppColor
 import com.example.trackingwatchactivity.presentation.utils.CardWithFilm
 import com.example.trackingwatchactivity.presentation.utils.InformationCard
 
-
-data class MoviesTest(
-    val nameOfTitle: String = "Breaking Bad",
-    val ico: Int = R.drawable.bannerbreakingbadtest,
-    val year: String = "2008",
-
-    val rating: String = "9.5"
-)
-
-val films = listOf(
-    MoviesTest(),  MoviesTest(), MoviesTest(), MoviesTest(), MoviesTest(), MoviesTest(), MoviesTest(),
-)
+@Composable
+fun DiscoverScreen(
+    viewModel: DiscoverScreenViewModel = hiltViewModel()
+){
+    val trendingShows by viewModel.trendingNowShows.collectAsState()
+    DiscoverScreenUi(
+        trendingFilmsNow = trendingShows
+    )
+}
 
 @Composable
-fun DiscoverScreenUi(){
+fun DiscoverScreenUi(
+    trendingFilmsNow: List<ShowModel>
+){
     Column(modifier = Modifier
         .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -72,7 +75,7 @@ fun DiscoverScreenUi(){
         LazyVerticalGrid(
             columns = GridCells.Fixed(3),
         ) {
-            items(films){
+            items(trendingFilmsNow){
                 films ->
                 CardWithFilm(film = films)
 
